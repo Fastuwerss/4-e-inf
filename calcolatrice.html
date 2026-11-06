@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    
+    .calcolatrice { width: 200px; display: flex; flex-direction: column; gap: 8px; }
+    .tasti { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+    input, button { padding: 8px; font-size: 16px; text-align: center; }
+  </style>
+</head>
+<body>
+
+<div class="calcolatrice">
+ 
+  <input type="text" id="n1" placeholder="Numero 1">
+  <input type="text" id="n2" placeholder="Numero 2">
+
+  
+  <div class="tasti">
+    <button onclick="op='+'">+</button>
+    <button onclick="op='-'">-</button>
+    <button onclick="op='*'">*</button>
+    <button onclick="op='/'">/</button>
+  </div>
+
+  
+  <button onclick="calcola()">=</button>
+
+  <!-- Output Risultato -->
+  <input type="text" id="res" readonly placeholder="Risultato">
+</div>
+
+<script>
+  let op = '';
+
+  function calcola() {
+    let a = Number(document.getElementById('n1').value);
+    let b = Number(document.getElementById('n2').value);
+    
+    if (op === '+') document.getElementById('res').value = a + b;
+    if (op === '-') document.getElementById('res').value = a - b;
+    if (op === '*') document.getElementById('res').value = a * b;
+    if (op === '/') document.getElementById('res').value = b !== 0 ? a / b : 'Errore';
+  }
+</script>
+
+</body>
+</html>
