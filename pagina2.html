@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Pagina 2 - Decripta</title>
+</head>
+<body>
+    <h2>Decripta la frase</h2>
+
+    <p id="testoCriptato"></p>
+
+    Inserisci lo scostamento: <input type="number" id="scostamento"><br><br>
+    <button onclick="decripta()">Decripta</button>
+
+    <p id="risultato"></p>
+    <a href="cifrario-cesare.html">Torna alla pagina 1</a>
+
+    <script>
+        let fraseCriptata = localStorage.getItem("fraseSegreta") || "";
+        document.getElementById("testoCriptato").innerHTML = "Frase criptata: <b>" + fraseCriptata + "</b>";
+
+        function decripta() {
+            let alfabeto = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            let spostamento = parseInt(document.getElementById("scostamento").value);
+            let fraseOriginale = "";
+
+            for (let i = 0; i < fraseCriptata.length; i++) {
+                let lettera = fraseCriptata[i];
+                let posizione = alfabeto.indexOf(lettera);
+
+                if (posizione == -1) {
+                    fraseOriginale = fraseOriginale + lettera;
+                } else {
+                    let vecchiaPosizione = posizione - spostamento;
+
+                    while (vecchiaPosizione < 0) {
+                        vecchiaPosizione = vecchiaPosizione + alfabeto.length;
+                    }
+
+                    fraseOriginale = fraseOriginale + alfabeto[vecchiaPosizione];
+                }
+            }
+
+            document.getElementById("risultato").innerHTML = "Frase originale: <b>" + fraseOriginale + "</b>";
+        }
+    </script>
+</body>
+</html>
