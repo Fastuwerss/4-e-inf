@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Pagina 1 - Cripta</title>
+</head>
+<body>
+    <h2>Cripta la frase</h2>
+
+    Frase: <input type="text" id="frase"><br><br>
+    Scostamento: <input type="number" id="scostamento"><br><br>
+
+    <button onclick="cripta()">Cripta</button>
+
+    <p id="risultato"></p>
+    <a href="pagina2.html">Vai alla pagina 2 per decriptare</a>
+
+    <script>
+        function cripta() {
+            let alfabeto = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            let frase = document.getElementById("frase").value.toUpperCase();
+            let spostamento = parseInt(document.getElementById("scostamento").value);
+            let fraseCriptata = "";
+
+            for (let i = 0; i < frase.length; i++) {
+                let lettera = frase[i];
+                let posizione = alfabeto.indexOf(lettera);
+
+                if (posizione == -1) {
+                    fraseCriptata = fraseCriptata + lettera;
+                } else {
+                    let nuovaPosizione = posizione + spostamento;
+
+                    while (nuovaPosizione >= alfabeto.length) {
+                        nuovaPosizione = nuovaPosizione - alfabeto.length;
+                    }
+
+                    fraseCriptata = fraseCriptata + alfabeto[nuovaPosizione];
+                }
+            }
+
+            document.getElementById("risultato").innerHTML = "Frase criptata: <b>" + fraseCriptata + "</b>";
+
+            localStorage.setItem("fraseSegreta", fraseCriptata);
+        }
+    </script>
+</body>
+</html>
